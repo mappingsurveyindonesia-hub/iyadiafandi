@@ -7,25 +7,20 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
 /* --- Navbar --- */
 #navbar {
-    background-color: #80bfff;
-    color: #E8EBD2;
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #005f99; /* Biru Unjani yang lebih solid */
+    color: white;
+    padding: 10px 0;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
-    border-bottom: 3px solid #005f99;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .container {
@@ -35,7 +30,6 @@ ul {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    flex-wrap: wrap; /* Agar responsif di HP */
 }
 
 .logo {
@@ -44,33 +38,40 @@ ul {
 }
 
 .logo h1 {
-    font-size: 20px;
+    font-size: 1.2rem;
     margin-left: 10px;
-    color: white;
+    color: #fff;
+    font-weight: 600;
 }
 
-nav ul li {
-    display: inline;
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-list li {
     margin-left: 20px;
 }
 
-nav ul li a {
+.nav-list a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
+    font-weight: 500;
+    font-size: 0.95rem;
     transition: color 0.3s;
 }
 
-nav ul li a:hover {
-    color: #004080;
+.nav-list a:hover {
+    color: #ffd700;
 }
 
 /* --- Hero Section --- */
 .hero-section {
-    margin-top: 80px; /* Kompensasi fixed navbar */
+    margin-top: 60px;
     height: 90vh;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.tripsavvy.com/thmb/SOnmosQsIiXiHzNonv2BDMGC4n0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1004877052-58ce1095ed954946a94477fb25766c0f.jpg');
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://upload.wikimedia.org/wikipedia/commons/e/e4/Ciledug_Raya.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -81,88 +82,136 @@ nav ul li a:hover {
 }
 
 .hero-content h1 {
-    font-size: 3em;
+    font-size: 2.5rem;
     margin-bottom: 10px;
+}
+
+.btn-explore {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #ffd700;
+    color: #005f99;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: transform 0.2s;
+}
+
+.btn-explore:hover {
+    transform: scale(1.05);
 }
 
 /* --- Map Section --- */
 #map-section {
-    padding: 40px 20px;
+    padding: 60px 20px;
+    background: white;
+}
+
+.section-title {
     text-align: center;
+    margin-bottom: 30px;
 }
 
 #map {
     width: 100%;
-    max-width: 1200px;
     height: 600px;
-    margin: 20px auto;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 2px solid #e0e0e0;
     z-index: 1;
 }
 
 /* --- Data Section --- */
 #data-section {
-    padding: 60px 0;
-    background-color: #fff;
+    padding: 60px 20px;
+    background-color: #f0f2f5;
 }
 
-#data-section h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    color: #333;
-}
-
-#data-section .container {
-    align-items: flex-start; /* Agar kartu rata atas */
+.data-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .column {
-    width: 30%; /* Menggunakan persentase agar responsif */
-    margin: 10px;
-    min-width: 300px;
+    flex: 1 1 300px;
+    max-width: 350px;
 }
 
 .data-item {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     overflow: hidden;
-    transition: transform 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .data-item:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.data-item img {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-    background-color: #f0f0f0;
+.icon-box {
+    background-color: #005f99;
+    color: white;
     padding: 20px;
-    box-sizing: border-box;
+    text-align: center;
+    font-size: 2rem;
 }
 
 .description {
     padding: 20px;
-    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.click-info {
-    color: #007bff;
-    font-size: 0.9em;
-    margin-top: 15px;
+.description h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: #005f99;
+}
+
+.description ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #555;
+    flex-grow: 1;
+}
+
+.description li {
+    margin-bottom: 5px;
+}
+
+.btn-zoom {
+    background: transparent;
+    border: 1px solid #005f99;
+    color: #005f99;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
     font-weight: bold;
-    text-align: center;
+    transition: all 0.2s;
+}
+
+.data-item:hover .btn-zoom {
+    background: #005f99;
+    color: white;
 }
 
 /* --- Author Section --- */
 #author-section {
-    background-color: #E8EBD2;
-    padding: 60px 20px;
+    background-color: white;
+    padding: 80px 20px;
     text-align: center;
 }
 
@@ -171,31 +220,49 @@ nav ul li a:hover {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid white;
+    border: 5px solid #005f99;
     margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.bio {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #666;
+    line-height: 1.6;
 }
 
 /* --- Footer --- */
 #footer {
-    background-color: #80bfff;
-    color: white;
+    background-color: #333;
+    color: #ddd;
     text-align: center;
-    padding: 30px;
-    margin-top: auto;
+    padding: 40px 20px;
 }
 
-/* --- Legend Control --- */
+.footer-content p {
+    margin: 5px 0;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* --- Legend --- */
 .legend {
     background: white;
     padding: 10px;
-    line-height: 1.5em;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 12px;
 }
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
+.legend h4 { margin: 0 0 5px; }
+.legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .nav-list { display: none; } /* Simplified for mobile */
+    .hero-content h1 { font-size: 1.8rem; }
 }
