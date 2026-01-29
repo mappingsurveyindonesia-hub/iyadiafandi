@@ -1,5 +1,5 @@
-// Inisialisasi Peta
-const map = L.map('map').setView([-6.82932, 108.72814], 13);
+// --- Inisialisasi Peta ---
+const map = L.map('map').setView([-6.906534, 108.736940], 14);
 
 // 1. Basemap OSM
 const basemapOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,81 +7,103 @@ const basemapOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-// 2. Basemap Google Satellite (UPDATED to HTTPS)
+// 2. Basemap Google Satellite (WAJIB HTTPS)
 const baseMapGoogle = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     attribution: '© Google Maps'
 });
 
-// 3. Basemap Google Streets (UPDATED to HTTPS)
+// 3. Basemap Google Streets (WAJIB HTTPS)
 const baseMapGoogleStreets = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     attribution: '© Google Maps'
 });
 
-// Fitur Tambahan
+// --- Fitur Kontrol ---
 map.addControl(new L.Control.Fullscreen());
 
 L.easyButton('fa-home', function (btn, map) {
-    map.setView([-6.82932, 108.72814], 13);
+    map.setView([-6.906534, 108.736940], 14);
 }, 'Zoom Home').addTo(map);
 
 L.control.locate({
     locateOptions: { enableHighAccuracy: true }
 }).addTo(map);
 
-/* --- LOAD DATA GEOJSON --- */
+// --- LOAD DATA GEOJSON ---
 
-// Layer Group untuk Jalan
+// Style untuk Jalan
+const styleJalan = {
+    color: "#ff3300",
+    weight: 3,
+    opacity: 0.8
+};
+
+// Layer Jalan
 const jalanLayer = L.geoJSON(null, {
-    style: {
-        color: "red",
-        weight: 2,
-        opacity: 1
-    },
+    style: styleJalan,
     onEachFeature: function (feature, layer) {
-        let pjg = feature.properties.panjang_m ? feature.properties.panjang_m.toFixed(2) : "0";
-        layer.bindPopup(`<b>Jalan Lingkungan</b><br>Panjang: ${pjg} m`);
+        let pjg = feature.properties.panjang_m ? feature.properties.panjang_m.toFixed(2) : "-";
+        layer.bindPopup(`
+            <div style="text-align:center">
+                <b>Jalan Lingkungan</b><br>
+                Panjang: ${pjg} m
+            </div>
+        `);
     }
 });
 
-// Ambil data Jalan.geojson
-$.getJSON("asset/Jalan.geojson", function (data) {
+// Panggil Data Jalan (Pastikan file di folder asset bernama 'jalan.geojson' huruf kecil)
+$.getJSON("./asset/jalan.geojson", function (data) {
     jalanLayer.addData(data);
     jalanLayer.addTo(map);
-}).fail(function() {
-    console.log("Error: File Jalan.geojson tidak ditemukan di folder asset/");
+    console.log("Data Jalan berhasil dimuat");
+}).fail(function(jqXHR, textStatus, errorThrown) {
+    console.error("Gagal memuat jalan.geojson: " + errorThrown);
 });
 
-// Layer Group untuk Persil
+// Style untuk Persil
+const stylePersil = {
+    fillColor: "#ffd700",
+    fillOpacity: 0.4,
+    color: "#333",
+    weight: 1
+};
+
+// Layer Persil
 const persilLayer = L.geoJSON(null, {
-    style: {
-        fillColor: "yellow",
-        fillOpacity: 0.4,
-        color: "black",
-        weight: 1
-    },
+    style: stylePersil,
     onEachFeature: function (feature, layer) {
         let props = feature.properties;
+        // Menangani kemungkinan nama field yang berbeda (case sensitive pada geojson properties)
+        let pemilik = props.Pemilik || props.pemilik || "Tanpa Nama";
+        let nib = props.NIB || props.nib || "-";
+        let luas = props.Luas__m_ || props.luas || 0;
+        
         let content = `
-            <b>Pemilik:</b> ${props.Pemilik || '-'}<br>
-            <b>NIB:</b> ${props.NIB || '-'}<br>
-            <b>Luas:</b> ${props.Luas__m_ ? props.Luas__m_.toFixed(2) : '-'} m²<br>
-            <b>Desa:</b> ${props.Desa || '-'}
+            <table style="width:100%; font-size:11px;">
+                <tr><td colspan="2" style="background:#005f99; color:white; padding:2px; text-align:center;"><b>INFORMASI BIDANG</b></td></tr>
+                <tr><td><b>Pemilik</b></td><td>: ${pemilik}</td></tr>
+                <tr><td><b>NIB</b></td><td>: ${nib}</td></tr>
+                <tr><td><b>Luas</b></td><td>: ${parseFloat(luas).toFixed(1)} m²</td></tr>
+                <tr><td><b>Desa</b></td><td>: ${props.Desa || "-"}</td></tr>
+            </table>
         `;
         layer.bindPopup(content);
     }
 });
 
-// Ambil data Persil.geojson
-$.getJSON("asset/Persil.geojson", function (data) {
+// Panggil Data Persil (Pastikan file di folder asset bernama 'persil.geojson' huruf kecil)
+$.getJSON("./asset/persil.geojson", function (data) {
     persilLayer.addData(data);
     persilLayer.addTo(map);
-}).fail(function() {
-    console.log("Error: File Persil.geojson tidak ditemukan di folder asset/");
+    console.log("Data Persil berhasil dimuat");
+}).fail(function(jqXHR, textStatus, errorThrown) {
+    console.error("Gagal memuat persil.geojson: " + errorThrown);
 });
 
-/* --- KONTROL LAYER --- */
+
+// --- Layer Control ---
 const baseMaps = {
     "OpenStreetMap": basemapOSM,
     "Google Satellite": baseMapGoogle,
@@ -95,25 +117,28 @@ const overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-/* --- LEGENDA --- */
+// --- Legenda ---
 const legend = L.control({ position: "bottomright" });
 legend.onAdd = function () {
     let div = L.DomUtil.create("div", "legend");
     div.innerHTML = `
         <h4>Legenda</h4>
-        <div><span style="background:red; width:20px; height:3px; display:inline-block; margin-right:5px;"></span> Jalan</div>
-        <div><span style="background:yellow; width:15px; height:15px; display:inline-block; border:1px solid black; margin-right:5px;"></span> Persil</div>
+        <div><i style="background:#ff3300; height:3px; margin-top:8px;"></i> Jalan</div>
+        <div><i style="background:#ffd700; border:1px solid #333;"></i> Persil Tanah</div>
     `;
     return div;
 };
 legend.addTo(map);
 
-/* --- FUNGSI INTERAKSI --- */
+// --- Fungsi Interaksi Zoom ---
 function zoomToFeature(lat, lng) {
-    map.flyTo([lat, lng], 19, {
+    map.flyTo([lat, lng], 18, {
         animate: true,
         duration: 1.5
     });
-    // Scroll otomatis ke peta
-    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+    // Scroll halus ke elemen peta
+    document.getElementById('map').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+    });
 }
