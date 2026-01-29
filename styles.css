@@ -1,0 +1,201 @@
+/* --- Global Styles --- */
+html {
+    scroll-behavior: smooth;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* --- Navbar --- */
+#navbar {
+    background-color: #80bfff;
+    color: #E8EBD2;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #005f99;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; /* Agar responsif di HP */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 20px;
+    margin-left: 10px;
+    color: white;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #004080;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    margin-top: 80px; /* Kompensasi fixed navbar */
+    height: 90vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.tripsavvy.com/thmb/SOnmosQsIiXiHzNonv2BDMGC4n0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1004877052-58ce1095ed954946a94477fb25766c0f.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+/* --- Map Section --- */
+#map-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+#map {
+    width: 100%;
+    max-width: 1200px;
+    height: 600px;
+    margin: 20px auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+/* --- Data Section --- */
+#data-section {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+#data-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+#data-section .container {
+    align-items: flex-start; /* Agar kartu rata atas */
+}
+
+.column {
+    width: 30%; /* Menggunakan persentase agar responsif */
+    margin: 10px;
+    min-width: 300px;
+}
+
+.data-item {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.data-item:hover {
+    transform: translateY(-5px);
+}
+
+.data-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.description {
+    padding: 20px;
+    text-align: left;
+}
+
+.click-info {
+    color: #007bff;
+    font-size: 0.9em;
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --- Author Section --- */
+#author-section {
+    background-color: #E8EBD2;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    margin-bottom: 20px;
+}
+
+/* --- Footer --- */
+#footer {
+    background-color: #80bfff;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: auto;
+}
+
+/* --- Legend Control --- */
+.legend {
+    background: white;
+    padding: 10px;
+    line-height: 1.5em;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}

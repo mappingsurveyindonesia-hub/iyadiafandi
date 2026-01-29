@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGIS Sistem Informasi Pertanahan</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+</head>
+<body>
+    
+    <header id="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="asset/logo_unjani.png" alt="Logo UNJANI" width="100">
+                <h1>WebGIS Pertanahan</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#hero-section">Home</a></li>
+                    <li><a href="#map-section">Peta</a></li>
+                    <li><a href="#data-section">Data</a></li>
+                    <li><a href="#author-section">Penulis</a></li>
+                    <li><a href="#footer">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="hero-section" class="hero-section">
+        <div class="hero-content">
+            <h1>Sistem Informasi Pertanahan UNJANI</h1>
+            <p>Platform Eksplorasi Basis Data Spasial Pertanahan</p>
+        </div>
+    </div>
+
+    <div id="map-section">
+        <h2>Peta Persebaran Aset Tanah</h2>
+        <div id="map"></div>
+    </div>
+
+    <div id="data-section">
+        <h2>Data Tersedia</h2>
+        <div class="container">
+            
+            <div class="column">
+                <div class="data-item" onclick="zoomToFeature(-6.906534, 108.736940)">
+                    <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Icon Persil">
+                    <div class="description">
+                        <h3>Persil: Dian Kartika</h3>
+                        <p>Data bidang tanah hak milik perseorangan.</p>
+                        <ul>
+                            <li><strong>NIB:</strong> 47052631332020</li>
+                            <li><strong>Lokasi:</strong> Desa Tenjomaya, Kec. Ciledug</li>
+                            <li><strong>Luas:</strong> ± 124.94 m²</li>
+                        </ul>
+                        <p class="click-info">(Klik untuk zoom ke lokasi)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="data-item" onclick="zoomToFeature(-6.905879, 108.736331)">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2554/2554922.png" alt="Icon Jalan">
+                    <div class="description">
+                        <h3>Jalan: Ruas Tenjomaya</h3>
+                        <p>Infrastruktur jalan lingkungan desa.</p>
+                        <ul>
+                            <li><strong>Tipe:</strong> Jalan Lingkungan</li>
+                            <li><strong>Panjang:</strong> ± 209.95 Meter</li>
+                            <li><strong>Koordinat Awal:</strong> -6.905879, 108.736331</li>
+                        </ul>
+                        <p class="click-info">(Klik untuk zoom ke lokasi)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="data-item" onclick="zoomToFeature(-6.871273, 108.657148)">
+                    <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Icon Persil">
+                    <div class="description">
+                        <h3>Persil: Lahan Pertanian</h3>
+                        <p>Area persawahan produktif.</p>
+                        <ul>
+                            <li><strong>NIB:</strong> - (Data Tekstual)</li>
+                            <li><strong>Lokasi:</strong> Kec. Ciledug, Kab. Cirebon</li>
+                            <li><strong>Luas:</strong> ± 500 m² (Estimasi)</li>
+                        </ul>
+                        <p class="click-info">(Klik untuk zoom ke lokasi)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="author-section">
+        <div class="author-content">
+            <h2>Tentang Penulis</h2>
+            <img src="asset/R.jpeg" alt="Foto Profil" class="profile-picture">
+            <div class="author-name">
+                <h3>Iyadi Afandi | 22050241005</h3>
+            </div>
+            <p>Seorang pemandu data geografis yang berpengalaman, dengan 8 tahun perjalanan dalam mengurai kompleksitas ruang dan waktu. Saya memiliki kemampuan untuk mengubah data menjadi wawasan yang berarti, melalui SIG, penginderaan jauh, dan WebGIS.</p>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-content">
+            <h3>Hubungi Saya</h3>
+            <p>Email: mappingsurveyindonesia@gmail.com</p>
+            <p>Phone: +6281320992903</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
